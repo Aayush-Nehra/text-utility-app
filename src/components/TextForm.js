@@ -1,7 +1,16 @@
 import React, {useState} from "react";
 
 export default function TextForm(props) {
+  //Setting Darkmode Style
+  let textStyle = {
+    color: 'white'
+  }
+  if (props.mode === 'light')
+    textStyle.color = 'black'
+  else
+    textStyle.color = 'white'
 
+  //Text Util Functions
   let convertToUpper = () => {
     let newText = text;
     setText(newText.toUpperCase())
@@ -27,21 +36,22 @@ export default function TextForm(props) {
     <>
     <div className="container">
       <div className="mb-3">
-      <h1>{props.heading}</h1>
+      <h2 style={textStyle}>{props.heading}</h2>
         <textarea
           rows="8"
           id="myBox"
           className="form-control"
           value={text}
           onChange={chanegeText}
+          style={props.mode==='light'?textStyle:{color: 'white', backgroundColor: '#4a4a4b'}}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-1" onClick={convertToUpper}>ConvertToUpperCase</button>
-      <button className="btn btn-primary mx-1" onClick={convertToLower}>ConvertToLowerCase</button>
-      <button className="btn btn-primary mx-1" onClick={clearText}>ClearText</button>
-      <button className="btn btn-primary mx-1" onClick={capFirstLetter}>capatalizeFirstLetter</button>
+      <button className="btn btn-primary mx-1" onClick={convertToUpper}>Upper Case</button>
+      <button className="btn btn-primary mx-1" onClick={convertToLower}>Lower Case</button>
+      <button className="btn btn-primary mx-1" onClick={capFirstLetter}>Capatalize First Letter</button>
+      <button className="btn btn-primary mx-1" onClick={clearText}>Clear Text</button>
     </div>
-    <div className="container my-3">
+    <div className="container my-3" style={textStyle}>
       <h2>Your Text Summary</h2>
       <p>Your text has {text.split(" ").length} words and {text.length} characters</p>
       <p>Time to read is {0.008*text.split(" ").length} minutes</p>
