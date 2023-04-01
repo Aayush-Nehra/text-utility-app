@@ -14,23 +14,28 @@ export default function TextForm(props) {
   let convertToUpper = () => {
     let newText = text;
     setText(newText.toUpperCase())
+    props.showUtilSuccessMessage("Text converted to upper case");
   }
   let convertToLower = () => {
     let newText = text;
     setText(newText.toLowerCase())
+    props.showUtilSuccessMessage("Text converted to lower case");
   }
-  let chanegeText = (event) => {
-    setText(event.target.value)
-  }
+  
   let clearText = () => {
+    props.showUtilSuccessMessage("Text cleared");
     setText('')
   }
 
   let capFirstLetter = ()=> {
     const finalSentence = text.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
     setText(finalSentence);
+    props.showUtilSuccessMessage("First letter of each word was capitalized");
   }
-
+  //Allows user to enter value to the text area field
+  let setTargetText = (event) => {
+    setText(event.target.value)
+  }
   const [text, setText] = useState("Enter some text");
   return (
     <>
@@ -42,7 +47,7 @@ export default function TextForm(props) {
           id="myBox"
           className="form-control"
           value={text}
-          onChange={chanegeText}
+          onChange={setTargetText}
           style={props.mode==='light'?textStyle:{color: 'white', backgroundColor: '#4a4a4b'}}
         ></textarea>
       </div>
