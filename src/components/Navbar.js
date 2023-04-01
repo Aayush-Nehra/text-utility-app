@@ -1,11 +1,21 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 
 export default function Navbar(props) {
-  
+
+  const [colorMode, changeColorMode] = useState('light');
+  let handleChange = (e)=>{
+    const target = e.target;
+    if (target.checked) {
+      changeColorMode(target.value);
+      props.websiteColorMode(target.value);
+      console.log(target.value)
+    }
+  }
+
   return (
-    <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg" style={props.mode.navbarStyle}>
+      <div className="container-fluid" >
         <a className="navbar-brand" href="/">
           {props.title}
         </a>
@@ -33,9 +43,14 @@ export default function Navbar(props) {
               </a>
             </li>
           </ul>
-          <div className={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
-            <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
-            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark Mode</label>
+          <div className="form-check">
+            <input type="radio" value="light" name="websiteColorMode" defaultChecked onChange={handleChange} /> Light
+          </div>
+          <div className="form-check">
+            <input type="radio" value="dark" name="websiteColorMode" onChange={handleChange} /> Dark
+          </div>
+          <div className="form-check">
+            <input type="radio" value="eco" name="websiteColorMode" onChange={handleChange} /> Eco
           </div>
         </div>
       </div>

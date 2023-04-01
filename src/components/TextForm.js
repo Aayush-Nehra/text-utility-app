@@ -48,7 +48,7 @@ export default function TextForm(props) {
       </>
     )
   }
-  
+
   //Allows user to enter value to the text area field
   let setTargetText = (event) => {
     setText(event.target.value)
@@ -58,14 +58,14 @@ export default function TextForm(props) {
     <>
     <div className="container">
       <div className="mb-3">
-      <h2 style={textStyle}>{props.heading}</h2>
+      <h2 style={props.mode.textStyle}>{props.heading}</h2>
         <textarea
           rows="8"
           id="myBox"
           className="form-control"
           value={text}
           onChange={setTargetText}
-          style={props.mode==='light'?textStyle:{color: 'white', backgroundColor: '#4a4a4b'}}
+          style={props.mode.textAreaStyle}
         ></textarea>
       </div>
       <button className="btn btn-primary mx-1" onClick={convertToUpper}>Upper Case</button>
