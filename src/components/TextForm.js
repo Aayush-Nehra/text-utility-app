@@ -32,6 +32,23 @@ export default function TextForm(props) {
     setText(finalSentence);
     props.showUtilSuccessMessage("First letter of each word was capitalized");
   }
+  
+  function WordCounter() {
+    let textAreaText = text.trim()
+    let noOfWords = 0;
+    if(textAreaText === '')
+      noOfWords = 0
+    else{
+      let words = textAreaText.split(' ')
+      noOfWords = words.filter(word => word!=='').length
+    }
+    return (
+      <>
+        {noOfWords}
+      </>
+    )
+  }
+  
   //Allows user to enter value to the text area field
   let setTargetText = (event) => {
     setText(event.target.value)
@@ -58,7 +75,7 @@ export default function TextForm(props) {
     </div>
     <div className="container my-3" style={textStyle}>
       <h2>Your Text Summary</h2>
-      <p>Your text has {text.split(" ").length} words and {text.length} characters</p>
+      <p>Your text has {<WordCounter/>} words and {text.length} characters</p>
       <p>Time to read is {0.008*text.split(" ").length} minutes</p>
       <h2>Text Preview</h2>
       <p>{text}</p>
