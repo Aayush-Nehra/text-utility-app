@@ -73,7 +73,7 @@ export default function TextForm(props) {
       <button className="btn btn-primary mx-1" onClick={capFirstLetter}>Capatalize First Letter</button>
       <button className="btn btn-primary mx-1" onClick={clearText}>Clear Text</button>
     </div>
-    <div className="container my-3" style={textStyle}>
+    <div className="container my-3" style={props.mode.textStyle}>
       <h2>Your Text Summary</h2>
       <p>Your text has {<WordCounter/>} words and {text.length} characters</p>
       <p>Time to read is {0.008*text.split(" ").length} minutes</p>

@@ -1,8 +1,14 @@
 import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
+import About from "./components/About";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   //Setting objects to format different parts of the app, need to create css to take care of formatting
@@ -16,7 +22,7 @@ function App() {
       backgroundColor: '#f8f9fa'
     },
     textAreaStyle: {
-      color: 'black', 
+      color: 'black',
       backgroundColor: 'white'
     }
 
@@ -34,7 +40,7 @@ function App() {
             backgroundColor: '#343A40'
           },
           textAreaStyle: {
-            color: 'white', 
+            color: 'white',
             backgroundColor: '#4a4a4b'
           }
         })
@@ -51,7 +57,7 @@ function App() {
             backgroundColor: '#f8f9fa'
           },
           textAreaStyle: {
-            color: 'black', 
+            color: 'black',
             backgroundColor: 'white'
           }
         })
@@ -85,13 +91,18 @@ function App() {
   }
 
   return (
-    <div>
-      <Navbar title="TextUtils" mode={mode} websiteColorMode={websiteColorMode} />
-      <Alert message={message} />
-      <div className="container my-3">
-        <TextForm heading="Enter text to update" mode={mode} showUtilSuccessMessage={showAlert} />
+    <Router>
+      <div>
+        <Navbar title="TextUtils" mode={mode} websiteColorMode={websiteColorMode} />
+        <Alert message={message} />
+        <div className="container my-3">
+          <Routes>
+            <Route path="/about" element={<About />}/>
+            <Route path="/" element={<TextForm heading="Enter text to update" mode={mode} showUtilSuccessMessage={showAlert} />}/>
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
