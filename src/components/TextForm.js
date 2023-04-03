@@ -31,7 +31,7 @@ export default function TextForm(props) {
     if(textAreaText === '')
       noOfWords = 0
     else{
-      let words = textAreaText.split(' ')
+      let words = textAreaText.split(/\s+/)
       noOfWords = words.filter(word => word!=='').length
     }
     return (
@@ -59,17 +59,17 @@ export default function TextForm(props) {
           onChange={setTargetText}
         ></textarea>
       </div>
-      <button className="btn btn-primary mx-1" onClick={convertToUpper}>Upper Case</button>
-      <button className="btn btn-primary mx-1" onClick={convertToLower}>Lower Case</button>
-      <button className="btn btn-primary mx-1" onClick={capFirstLetter}>Capatalize First Letter</button>
-      <button className="btn btn-primary mx-1" onClick={clearText}>Clear Text</button>
+      <button className="btn btn-primary mx-1" disabled={text.length === 0} onClick={convertToUpper}>Upper Case</button>
+      <button className="btn btn-primary mx-1" disabled={text.length === 0} onClick={convertToLower}>Lower Case</button>
+      <button className="btn btn-primary mx-1" disabled={text.length === 0} onClick={capFirstLetter}>Capatalize First Letter</button>
+      <button className="btn btn-primary mx-1" disabled={text.length === 0} onClick={clearText}>Clear Text</button>
     </div>
     <div className={`container my-3`} id={`text-${props.mode}`}>
       <h2>Your Text Summary</h2>
       <p>Your text has {<WordCounter/>} words and {text.length} characters</p>
-      <p>Time to read is {0.008*text.split(" ").filter(word => word!=='').length} minutes</p>
+      <p>Time to read is {0.008*text.split(/\s+/).filter(word => word!=='').length} minutes</p>
       <h2>Text Preview</h2>
-      <p>{text}</p>
+      <p>{text.length === 0?"Enter some text in text box to preview":text}</p>
     </div>
     </>
   );

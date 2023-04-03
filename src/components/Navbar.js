@@ -5,13 +5,10 @@ import {Link} from "react-router-dom";
 
 export default function Navbar(props) {
 
-  const [colorMode, changeColorMode] = useState('light');
   let handleChange = (e)=>{
     const target = e.target;
     if (target.checked) {
-      changeColorMode(target.value);
       props.websiteColorMode(target.value);
-      console.log(target.value)
     }
   }
 
