@@ -1,4 +1,3 @@
-import "./App.css";
 import Navbar from "./components/Navbar";
 import TextForm from "./components/TextForm";
 import About from "./components/About";
@@ -12,72 +11,21 @@ import {
 
 function App() {
   //Setting objects to format different parts of the app, need to create css to take care of formatting
-  const [mode, setMode] = useState({
-    modeType: 'light',
-    textStyle: {
-      color: 'black',
-    },
-    navbarStyle: {
-      color: 'black',
-      backgroundColor: '#f8f9fa'
-    },
-    textAreaStyle: {
-      color: 'black',
-      backgroundColor: 'white'
-    }
-
-  })
+  const [mode, setMode]  = useState('light')
   let websiteColorMode = (mode) => {
     switch (mode) {
       case 'dark':
-        setMode({
-          modeType: 'dark',
-          textStyle: {
-            color: 'white',
-          },
-          navbarStyle: {
-            color: 'white',
-            backgroundColor: '#343A40'
-          },
-          textAreaStyle: {
-            color: 'white',
-            backgroundColor: '#4a4a4b'
-          }
-        })
+        setMode('dark')
         document.body.style.backgroundColor = '#052d68'
         break;
       case 'light':
-        setMode({
-          modeType: 'light',
-          textStyle: {
-            color: 'black',
-          },
-          navbarStyle: {
-            color: 'black',
-            backgroundColor: '#f8f9fa'
-          },
-          textAreaStyle: {
-            color: 'black',
-            backgroundColor: 'white'
-          }
-        })
+        setMode('light')
         document.body.style.backgroundColor = 'white'
         break;
       case 'eco':
-        setMode({
-          modeType: 'eco',
-          textStyle: {
-            color: 'white',
-          },
-          navbarStyle: {
-            color: 'black',
-            backgroundColor: 'yellow'
-          }
-        })
+        setMode('eco')
         document.body.style.backgroundColor = 'green'
         break;
-      default:
-        console.log(`No mode selected.`);
     }
   }
 
@@ -97,7 +45,7 @@ function App() {
         <Alert message={message} />
         <div className="container my-3">
           <Routes>
-            <Route path="/about" element={<About />}/>
+            <Route path="/about" element={<About mode={mode}/>}/>
             <Route path="/" element={<TextForm heading="Enter text to update" mode={mode} showUtilSuccessMessage={showAlert} />}/>
           </Routes>
         </div>

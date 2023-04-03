@@ -1,3 +1,4 @@
+import "../App.css";
 import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 import {Link} from "react-router-dom";
@@ -15,7 +16,7 @@ export default function Navbar(props) {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg" style={props.mode.navbarStyle}>
+    <nav className={`navbar navbar-expand-lg navbar-${props.mode}`} data-bs-theme={props.mode==='dark'?'dark':''}>
       <div className="container-fluid" >
         <Link className="navbar-brand" to="/">
           {props.title}
@@ -44,6 +45,9 @@ export default function Navbar(props) {
               </Link>
             </li>
           </ul>
+          <div className='form-check'>
+            Website Mode
+          </div>
           <div className="form-check">
             <input type="radio" value="light" name="websiteColorMode" defaultChecked onChange={handleChange} /> Light
           </div>

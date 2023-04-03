@@ -1,15 +1,7 @@
 import React, {useState} from "react";
+import "../App.css"
 
 export default function TextForm(props) {
-  //Setting Darkmode Style
-  let textStyle = {
-    color: 'white'
-  }
-  if (props.mode === 'light')
-    textStyle.color = 'black'
-  else
-    textStyle.color = 'white'
-
   //Text Util Functions
   let convertToUpper = () => {
     let newText = text;
@@ -58,14 +50,13 @@ export default function TextForm(props) {
     <>
     <div className="container">
       <div className="mb-3">
-      <h2 style={props.mode.textStyle}>{props.heading}</h2>
+      <h2 id={`text-${props.mode}`}>{props.heading}</h2>
         <textarea
           rows="8"
           id="myBox"
-          className="form-control"
+          className={`form-control textarea-${props.mode}`}
           value={text}
           onChange={setTargetText}
-          style={props.mode.textAreaStyle}
         ></textarea>
       </div>
       <button className="btn btn-primary mx-1" onClick={convertToUpper}>Upper Case</button>
@@ -73,10 +64,10 @@ export default function TextForm(props) {
       <button className="btn btn-primary mx-1" onClick={capFirstLetter}>Capatalize First Letter</button>
       <button className="btn btn-primary mx-1" onClick={clearText}>Clear Text</button>
     </div>
-    <div className="container my-3" style={props.mode.textStyle}>
+    <div className={`container my-3`} id={`text-${props.mode}`}>
       <h2>Your Text Summary</h2>
       <p>Your text has {<WordCounter/>} words and {text.length} characters</p>
-      <p>Time to read is {0.008*text.split(" ").length} minutes</p>
+      <p>Time to read is {0.008*text.split(" ").filter(word => word!=='').length} minutes</p>
       <h2>Text Preview</h2>
       <p>{text}</p>
     </div>
